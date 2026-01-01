@@ -65,7 +65,7 @@ const Skills = () => {
                 <div className="text-center mb-5">
                     <span className="section-label">EXPERTISE</span>
                     <h2 className="section-title mt-2">Technical <span className="highlight">Skills</span></h2>
-                    <p className="text-muted" style={{ maxWidth: '600px', margin: '0 auto', color: 'var(--text-muted)' }}>
+                    <p className="section-description">
                         A comprehensive toolkit of technologies and methodologies I leverage to build secure and scalable solutions.
                     </p>
                 </div>
