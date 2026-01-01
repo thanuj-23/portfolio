@@ -39,7 +39,7 @@ const About = () => {
                         </div>
                         <div className="about-contact-item">
                             <label>EMAIL</label>
-                            <span>hello@thanuj.com</span>
+                            <span>hello@itsthanuj.com</span>
                         </div>
                     </div>
 

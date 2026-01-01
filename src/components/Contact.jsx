@@ -36,11 +36,11 @@ const Contact = () => {
                                 <label className="email-label">
                                     <i className="fa-solid fa-circle" style={{ fontSize: '6px', color: '#2ea043' }}></i> EMAIL
                                 </label>
-                                <a href="mailto:Hello@thanuj.com" className="email-link">
-                                    Hello@thanuj.com
+                                <a href="mailto:hello@itsthanuj.com" className="email-link">
+                                    hello@itsthanuj.com
                                 </a>
                             </div>
-                            <a href="mailto:Hello@thanuj.com" className="get-in-touch-btn">
+                            <a href="mailto:hello@itsthanuj.com" className="get-in-touch-btn">
                                 <i className="fa-regular fa-envelope me-2"></i> GET IN TOUCH
                             </a>
                         </div>

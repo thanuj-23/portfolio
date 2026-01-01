@@ -42,7 +42,7 @@ const Hero = () => {
                     </div>
                     <div className="hero-btn" style={{ '--i': 6 }}>
                         <a href="https://www.linkedin.com/in/thanujthilakarathne/" target="_blank" rel="noopener noreferrer" className="btn btn-primary">Hire Me</a>
-                        <a href="mailto:Hello@thanuj.com" className="btn btn-secondary">Contact Me</a>
+                        <a href="mailto:hello@itsthanuj.com" className="btn btn-secondary">Contact Me</a>
                     </div>
                 </div>
             </section>
