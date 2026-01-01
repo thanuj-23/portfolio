@@ -44,7 +44,7 @@ const About = () => {
                     </div>
 
                     <div className="cv-btn-wrapper">
-                        <a href="/cv.pdf" download="Thanuj_CV.pdf" className="btn btn-primary">
+                        <a href="/cv.pdf" download="Thanuj Thilakarathne CV.pdf" className="btn btn-primary">
                             Download CV <i className="fa-solid fa-download" style={{ marginLeft: '8px' }}></i>
                         </a>
                     </div>
