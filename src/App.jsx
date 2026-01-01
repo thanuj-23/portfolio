@@ -43,6 +43,34 @@ function App() {
       duration: 1000,
       offset: 100,
     });
+
+    // Disable Right Click
+    const handleContextMenu = (e) => {
+      e.preventDefault();
+    };
+
+    // Disable Common Shortcut Keys (F12, Ctrl+U, Ctrl+Shift+I, Ctrl+S, Ctrl+P)
+    const handleKeyDown = (e) => {
+      if (
+        e.key === 'F12' ||
+        (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+        (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+        (e.ctrlKey && e.key === 'U') ||
+        (e.ctrlKey && e.key === 'S') ||
+        (e.ctrlKey && e.key === 'P')
+      ) {
+        e.preventDefault();
+      }
+    };
+
+    document.addEventListener('contextmenu', handleContextMenu);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('contextmenu', handleContextMenu);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
   }, []);
 
   return (

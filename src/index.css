@@ -37,6 +37,11 @@ body {
   background: var(--bg-color);
   color: var(--text-color);
   line-height: 1.6;
+  user-select: none;
+  /* Prevent text selection */
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
 }
 
 /* Glassmorphism Utility */
