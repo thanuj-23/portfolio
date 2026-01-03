@@ -4,6 +4,7 @@ import blogData from '../data/BlogData';
 import './Blog.css';
 
 import NewsletterModal from './NewsletterModal';
+import FloatingSubscribeBtn from './FloatingSubscribeBtn';
 
 const BlogPost = () => {
     // ... existing hook ...
@@ -70,6 +71,7 @@ const BlogPost = () => {
     return (
         <div className="blog-page" style={{ paddingTop: '0px', minHeight: '100vh' }}>
             <NewsletterModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <FloatingSubscribeBtn />
 
             {/* Header */}
             <header className="cert-header mb-3">

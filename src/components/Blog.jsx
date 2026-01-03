@@ -4,6 +4,7 @@ import blogData from '../data/BlogData';
 import './Blog.css';
 
 import NewsletterModal from './NewsletterModal';
+import FloatingSubscribeBtn from './FloatingSubscribeBtn';
 
 const Blog = () => {
     const [searchTerm, setSearchTerm] = React.useState('');
@@ -21,6 +22,7 @@ const Blog = () => {
     return (
         <div className="blog-page">
             <NewsletterModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+            <FloatingSubscribeBtn />
 
             {/* Header */}
             <div className="container mb-5">
