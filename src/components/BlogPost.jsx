@@ -3,10 +3,13 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import blogData from '../data/BlogData';
 import './Blog.css';
 
+import NewsletterModal from './NewsletterModal';
+
 const BlogPost = () => {
     // ... existing hook ...
     const { id } = useParams();
     const post = blogData.find(p => p.id === id);
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -66,12 +69,19 @@ const BlogPost = () => {
 
     return (
         <div className="blog-page" style={{ paddingTop: '0px', minHeight: '100vh' }}>
+            <NewsletterModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
             {/* Header */}
             <header className="cert-header mb-3">
                 <div className="container d-flex justify-content-between align-items-center" style={{ paddingTop: '10px', paddingBottom: '1.5rem' }}>
-                    <Link to="/blog" className="back-btn">
-                        <i className="fa-solid fa-arrow-left"></i> Back to Blog
-                    </Link>
+                    <div className="d-flex align-items-center">
+                        <Link to="/blog" className="back-btn mr-3" style={{ marginRight: '15px' }}>
+                            <i className="fa-solid fa-arrow-left"></i> Back to Blog
+                        </Link>
+                        <button className="btn btn-sm btn-outline-info" onClick={() => setIsModalOpen(true)} style={{ borderRadius: '20px', fontSize: '0.8rem' }}>
+                            <i className="fa-solid fa-bell mr-1"></i> Follow
+                        </button>
+                    </div>
                     <div className="header-spacer d-none d-md-block" style={{ width: '100px' }}></div>
                 </div>
             </header>

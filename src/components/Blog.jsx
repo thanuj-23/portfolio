@@ -3,8 +3,11 @@ import { Link } from 'react-router-dom';
 import blogData from '../data/BlogData';
 import './Blog.css';
 
+import NewsletterModal from './NewsletterModal';
+
 const Blog = () => {
     const [searchTerm, setSearchTerm] = React.useState('');
+    const [isModalOpen, setIsModalOpen] = React.useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
@@ -17,13 +20,18 @@ const Blog = () => {
 
     return (
         <div className="blog-page">
+            <NewsletterModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
             {/* Header */}
             <div className="container mb-5">
                 <div className="row align-items-center">
-                    <div className="col-md-4 mb-3 mb-md-0 text-start">
-                        <Link to="/" className="back-btn" style={{ fontSize: '1rem', color: 'var(--text-color)' }}>
-                            <i className="fa-solid fa-arrow-left"></i> Back to Home
+                    <div className="col-md-4 mb-3 mb-md-0 text-start d-flex align-items-center">
+                        <Link to="/" className="back-btn mr-3" style={{ fontSize: '1rem', color: 'var(--text-color)', marginRight: '15px' }}>
+                            <i className="fa-solid fa-arrow-left"></i> Home
                         </Link>
+                        <button className="btn btn-sm btn-outline-info" onClick={() => setIsModalOpen(true)} style={{ borderRadius: '20px', fontSize: '0.8rem' }}>
+                            <i className="fa-solid fa-bell mr-1"></i> Follow
+                        </button>
                     </div>
                     <div className="col-md-4 text-center mb-3 mb-md-0">
                         <h2 className="blog-title m-0" style={{ fontSize: '2rem' }}>Security Writeups</h2>
