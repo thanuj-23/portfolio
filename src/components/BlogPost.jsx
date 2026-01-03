@@ -67,7 +67,7 @@ const BlogPost = () => {
     return (
         <div className="blog-page" style={{ paddingTop: '0px', minHeight: '100vh' }}>
             {/* Header */}
-            <header className="cert-header mb-5">
+            <header className="cert-header mb-3">
                 <div className="container d-flex justify-content-between align-items-center" style={{ paddingTop: '10px', paddingBottom: '1.5rem' }}>
                     <Link to="/blog" className="back-btn">
                         <i className="fa-solid fa-arrow-left"></i> Back to Blog
