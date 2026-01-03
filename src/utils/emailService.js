@@ -1,28 +1,27 @@
-import emailjs from '@emailjs/browser';
+import jsonp from 'jsonp';
 
-// REPLACE THESE WITH YOUR ACTUAL KEYS FROM EMAILJS.COM
-const SERVICE_ID = 'service_dz0voci';
-const TEMPLATE_ID = 'template_t1dkkg5';
-const PUBLIC_KEY = 'Itc9Y1rZ88g9c1X6W';
+const FORM_ID = '8933748';
+// Note: For JSONP approach, we typically post to the 'subscribe' endpoint which might not need API Key if using the public form URL, 
+// OR we use the API URL with params.
+// ConvertKit standard JSONP URL: https://app.convertkit.com/forms/{id}/subscriptions?email={email}
 
-export const subscribeToNewsletter = async (email) => {
-    try {
-        const templateParams = {
-            from_name: email, // The subscriber's email
-            message: `New subscription request from: ${email}`,
-            reply_to: email,
-        };
+// We will use the standard 'app' endpoint which is more reliable for client-side than 'api'
+const BASE_URL = `https://app.convertkit.com/forms/${FORM_ID}/subscriptions`;
 
-        const response = await emailjs.send(
-            SERVICE_ID,
-            TEMPLATE_ID,
-            templateParams,
-            PUBLIC_KEY
-        );
+export const subscribeToNewsletter = (email) => {
+    return new Promise((resolve, reject) => {
+        const url = `${BASE_URL}?email_address=${encodeURIComponent(email)}`;
 
-        return { success: true, response };
-    } catch (error) {
-        console.error('Email subscription failed:', error);
-        return { success: false, error };
-    }
+        jsonp(url, { param: 'callback' }, (err, data) => {
+            if (err) {
+                console.error('ConvertKit JSONP error:', err);
+                resolve({ success: false, error: err });
+            } else if (data.status === 'success' || data.subscription) {
+                resolve({ success: true, response: data });
+            } else {
+                console.error('ConvertKit subscription failed:', data);
+                resolve({ success: false, error: data.msg || 'Subscription failed' });
+            }
+        });
+    });
 };
