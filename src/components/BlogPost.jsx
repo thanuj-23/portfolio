@@ -90,16 +90,7 @@ const BlogPost = () => {
                                 <span className="mr-3"><i className="fa-solid fa-tag mr-1"></i> {post.category}</span>
                             </div>
 
-                            {/* Tags Display */}
-                            {post.keywords && (
-                                <div className="text-center mb-5">
-                                    {post.keywords.map((keyword, index) => (
-                                        <span key={index} className="badge bg-dark border border-secondary text-light me-2 mb-2 p-2" style={{ fontWeight: 'normal', opacity: 0.8 }}>
-                                            #{keyword}
-                                        </span>
-                                    ))}
-                                </div>
-                            )}
+
 
                             <img
                                 src={post.image}
@@ -111,6 +102,20 @@ const BlogPost = () => {
                             <div className="blog-content">
                                 {renderContent(post.content)}
                             </div>
+
+                            {/* Tags Display */}
+                            {post.keywords && (
+                                <div className="mt-5 pt-4 border-top border-secondary">
+                                    <h5 className="text-white mb-3" style={{ fontSize: '1rem', opacity: 0.8 }}>Related Topics:</h5>
+                                    <div className="d-flex flex-wrap">
+                                        {post.keywords.map((keyword, index) => (
+                                            <span key={index} className="badge bg-dark border border-secondary text-light me-2 mb-2 p-2" style={{ fontWeight: 'normal', opacity: 0.8 }}>
+                                                #{keyword}
+                                            </span>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>
