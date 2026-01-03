@@ -9,22 +9,17 @@ const Blog = () => {
     }, []);
 
     return (
-        <div className="blog-page" style={{ paddingTop: '80px', minHeight: '100vh', paddingBottom: '50px' }}>
+        <div className="blog-page" style={{ paddingTop: '100px', minHeight: '100vh', paddingBottom: '50px' }}>
             {/* Header */}
-            <div className="container py-5">
-                <div className="d-flex justify-content-between align-items-center mb-5">
-                    <Link to="/" className="back-btn" style={{ fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-                        <i className="fa-solid fa-arrow-left"></i> Back to Home
-                    </Link>
-                </div>
+            <div className="container d-flex justify-content-between align-items-center mb-5">
+                <Link to="/" className="back-btn" style={{ fontSize: '1rem', color: 'var(--text-color)' }}>
+                    <i className="fa-solid fa-arrow-left"></i> Back to Home
+                </Link>
+                <h2 className="blog-title m-0" style={{ fontSize: '2rem' }}>Security Writeups</h2>
+                <div className="d-none d-md-block" style={{ width: '130px' }}></div>
+            </div>
 
-                <div className="text-center mb-5 fade-in-up">
-                    <h2 className="blog-title">Cybersecurity Research & <br /> CTF Writeups</h2>
-                    <p className="blog-subtitle">
-                        Exploring the depths of information security, one flag at a time.
-                    </p>
-                </div>
-
+            <div className="container">
                 <div className="row">
                     {blogData.map((post, index) => (
                         <div key={post.id} className="col-md-6 col-lg-4 mb-4">
