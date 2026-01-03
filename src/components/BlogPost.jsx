@@ -36,7 +36,7 @@ const BlogPost = () => {
     };
 
     return (
-        <div className="blog-page" style={{ paddingTop: '80px', minHeight: '100vh' }}>
+        <div className="blog-page" style={{ paddingTop: '30px', minHeight: '100vh' }}>
             {/* Header */}
             <header className="cert-header mb-5">
                 <div className="container d-flex justify-content-between align-items-center py-4">
@@ -53,7 +53,7 @@ const BlogPost = () => {
                         <div className="glass-card p-4 p-md-5 mb-5">
                             <h1 className="text-white mb-3 text-center">{post.title}</h1>
 
-                            <div className="d-flex justify-content-center align-items-center mb-4 text-muted">
+                            <div className="d-flex justify-content-center align-items-center mb-4" style={{ color: '#ccc' }}>
                                 <span className="mr-3"><i className="fa-regular fa-user mr-1"></i> {post.author}</span>
                                 <span className="mx-3">|</span>
                                 <span className="mr-3"><i className="fa-regular fa-calendar mr-1"></i> {post.date}</span>
