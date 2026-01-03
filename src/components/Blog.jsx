@@ -9,9 +9,9 @@ const Blog = () => {
     }, []);
 
     return (
-        <div className="blog-page" style={{ paddingTop: '100px', minHeight: '100vh', paddingBottom: '50px' }}>
+        <div className="blog-page" style={{ paddingTop: '85px', minHeight: '100vh', paddingBottom: '50px' }}>
             {/* Header */}
-            <div className="container d-flex justify-content-between align-items-center mb-5">
+            <div className="container d-flex justify-content-between align-items-center mb-4">
                 <Link to="/" className="back-btn" style={{ fontSize: '1rem', color: 'var(--text-color)' }}>
                     <i className="fa-solid fa-arrow-left"></i> Back to Home
                 </Link>
