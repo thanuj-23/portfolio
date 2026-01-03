@@ -16,7 +16,7 @@ const Blog = () => {
     );
 
     return (
-        <div className="blog-page" style={{ paddingTop: '85px', minHeight: '100vh', paddingBottom: '50px' }}>
+        <div className="blog-page">
             {/* Header */}
             <div className="container mb-5">
                 <div className="row align-items-center">
