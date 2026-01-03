@@ -67,6 +67,11 @@ const Navbar = () => {
                             <i className="fa-regular fa-user"></i> ABOUT
                         </a>
                     </li>
+                    <li style={{ '--i': 2.5 }}>
+                        <a href="/blog">
+                            <i className="fa-solid fa-blog"></i> BLOG
+                        </a>
+                    </li>
                     <li className="dropdown" style={{ '--i': 3 }}>
                         <a href="#" className={['services', 'experience', 'portfolio', 'testimonials'].includes(activeLink) ? 'active' : ''} onClick={(e) => e.preventDefault()}>
                             <i className="fa-solid fa-briefcase"></i> WORK <i className="fa-solid fa-chevron-down" style={{ fontSize: '0.8rem', marginLeft: 'auto' }}></i>

@@ -137,7 +137,8 @@ const certificationsData = [
             "/Certifications/isc2-2.jpg",
             "/Certifications/isc2-3.jpg",
             "/Certifications/isc2-4.jpg",
-            "/Certifications/isc2-5.jpg"
+            "/Certifications/isc2-5.jpg",
+            "/Certifications/isc2-6.jpg"
         ]
     }
 ];

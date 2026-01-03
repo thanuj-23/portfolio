@@ -15,6 +15,9 @@ import AOS from 'aos';
 import 'aos/dist/aos.css';
 import ScrollToTop from './components/ScrollToTop';
 import Footer from './components/Footer';
+import Blog from './components/Blog';
+import BlogPost from './components/BlogPost';
+
 
 // Home Component wrapping all main sections
 const Home = () => {
@@ -79,6 +82,8 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/certifications" element={<AllCertifications />} />
+        <Route path="/blog" element={<Blog />} />
+        <Route path="/blog/:id" element={<BlogPost />} />
       </Routes>
     </Router>
   );
