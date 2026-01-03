@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './Blog.css';
+import { subscribeToNewsletter } from '../utils/emailService';
 
 const NewsletterModal = ({ isOpen, onClose }) => {
     const [email, setEmail] = useState('');
@@ -7,16 +8,20 @@ const NewsletterModal = ({ isOpen, onClose }) => {
 
     if (!isOpen) return null;
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setStatus('submitting');
 
-        // Simulate API call
-        setTimeout(() => {
-            console.log(`Subscribing email: ${email}`);
+        const result = await subscribeToNewsletter(email);
+
+        if (result.success) {
             setStatus('success');
             setEmail('');
-        }, 1500);
+        } else {
+            setStatus('error');
+            // Keep email so they can try again
+            console.error("Subscription error");
+        }
     };
 
     return (
