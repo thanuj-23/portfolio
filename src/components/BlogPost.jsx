@@ -10,7 +10,36 @@ const BlogPost = () => {
 
     useEffect(() => {
         window.scrollTo(0, 0);
-    }, [id]);
+
+        if (post) {
+            // Update Page Title
+            document.title = `${post.title} - Thanuj's Security Blog`;
+
+            // Update Meta Description
+            let metaDescription = document.querySelector('meta[name="description"]');
+            if (metaDescription) {
+                metaDescription.setAttribute('content', post.excerpt);
+            } else {
+                metaDescription = document.createElement('meta');
+                metaDescription.name = "description";
+                metaDescription.content = post.excerpt;
+                document.head.appendChild(metaDescription);
+            }
+
+            // Update Meta Keywords
+            if (post.keywords) {
+                let metaKeywords = document.querySelector('meta[name="keywords"]');
+                if (metaKeywords) {
+                    metaKeywords.setAttribute('content', post.keywords.join(', '));
+                } else {
+                    metaKeywords = document.createElement('meta');
+                    metaKeywords.name = "keywords";
+                    metaKeywords.content = post.keywords.join(', ');
+                    document.head.appendChild(metaKeywords);
+                }
+            }
+        }
+    }, [id, post]);
 
     if (!post) {
         return <Navigate to="/blog" replace />;
@@ -60,6 +89,17 @@ const BlogPost = () => {
                                 <span className="mx-3">|</span>
                                 <span className="mr-3"><i className="fa-solid fa-tag mr-1"></i> {post.category}</span>
                             </div>
+
+                            {/* Tags Display */}
+                            {post.keywords && (
+                                <div className="text-center mb-5">
+                                    {post.keywords.map((keyword, index) => (
+                                        <span key={index} className="badge bg-dark border border-secondary text-light me-2 mb-2 p-2" style={{ fontWeight: 'normal', opacity: 0.8 }}>
+                                            #{keyword}
+                                        </span>
+                                    ))}
+                                </div>
+                            )}
 
                             <img
                                 src={post.image}
