@@ -25,7 +25,21 @@ const BlogPost = () => {
     // ... existing renderContent ...
     const renderContent = (content) => {
         return content.split('\n').map((line, index) => {
-            // ...
+            if (line.startsWith('### ')) {
+                return <h3 key={index} className="text-white mt-4 mb-2">{line.replace('### ', '')}</h3>;
+            } else if (line.startsWith('**') && line.endsWith('**')) {
+                return <p key={index} className="text-white"><strong>{line.replace(/\*\*/g, '')}</strong></p>;
+            } else if (line.match(/^\d+\.\s/)) {
+                return <li key={index} className="text-white ml-4 mb-2">{line.replace(/^\d+\.\s/, '')}</li>;
+            } else if (line.startsWith('- ')) {
+                return <li key={index} className="text-white ml-4 mb-2">{line.substring(2)}</li>;
+            } else if (line.startsWith('`') && line.endsWith('`')) {
+                return <p key={index} className="text-white"><code style={{ background: 'rgba(255,255,255,0.1)', padding: '2px 5px', borderRadius: '4px' }}>{line.replace(/`/g, '')}</code></p>;
+            } else if (line.trim() === '') {
+                return <br key={index} />;
+            } else {
+                return <p key={index} style={{ color: '#ccc', lineHeight: '1.6' }}>{line}</p>;
+            }
         });
     };
 
