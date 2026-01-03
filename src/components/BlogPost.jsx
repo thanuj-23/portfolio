@@ -23,14 +23,28 @@ const BlogPost = () => {
     }
 
     // ... existing renderContent ...
-    // Helper to parse inline bold text like **text**
+    // Helper to parse inline styles: code, bold, italic
     const parseInlineFormat = (text) => {
-        const parts = text.split(/(\*\*.*?\*\*)/g);
-        return parts.map((part, index) => {
-            if (part.startsWith('**') && part.endsWith('**')) {
-                return <strong key={index} className="text-white" style={{ fontWeight: '700' }}>{part.slice(2, -2)}</strong>;
+        // 1. Split by code blocks first (priority)
+        return text.split(/(`[^`]+`)/g).map((part, i) => {
+            if (part.startsWith('`') && part.endsWith('`')) {
+                return <code key={i} style={{ background: 'rgba(255,255,255,0.15)', padding: '2px 6px', borderRadius: '4px', fontFamily: 'monospace', color: '#ff7b72', fontSize: '0.9em' }}>{part.slice(1, -1)}</code>;
             }
-            return part;
+
+            // 2. Split by bold
+            return part.split(/(\*\*.*?\*\*)/g).map((subPart, j) => {
+                if (subPart.startsWith('**') && subPart.endsWith('**')) {
+                    return <strong key={`${i}-${j}`} className="text-white" style={{ fontWeight: '700' }}>{subPart.slice(2, -2)}</strong>;
+                }
+
+                // 3. Split by italic
+                return subPart.split(/(\*[^*]+?\*)/g).map((innerPart, k) => {
+                    if (innerPart.startsWith('*') && innerPart.endsWith('*')) {
+                        return <em key={`${i}-${j}-${k}`} style={{ fontStyle: 'italic', color: '#d2a8ff' }}>{innerPart.slice(1, -1)}</em>;
+                    }
+                    return innerPart;
+                });
+            });
         });
     };
 
@@ -43,6 +57,7 @@ const BlogPost = () => {
             } else if (line.startsWith('- ')) {
                 return <li key={index} className="text-white ml-4 mb-2" style={{ listStylePosition: 'inside' }}>{parseInlineFormat(line.substring(2))}</li>;
             } else if (line.startsWith('`') && line.endsWith('`')) {
+                // Block code (preserving for backward compatibility, though parseInlineFormat handles it too)
                 return <p key={index} className="text-white my-3"><code style={{ background: 'rgba(255,255,255,0.1)', padding: '4px 8px', borderRadius: '4px', fontFamily: 'monospace', color: '#58a6ff' }}>{line.replace(/`/g, '')}</code></p>;
             } else if (line.trim() === '') {
                 return <br key={index} />;
