@@ -3,45 +3,18 @@ import { useParams, Link, Navigate } from 'react-router-dom';
 import blogData from '../data/BlogData';
 import './Blog.css';
 
-import NewsletterModal from './NewsletterModal';
 import FloatingSubscribeBtn from './FloatingSubscribeBtn';
 
 const BlogPost = () => {
     // ... existing hook ...
     const { id } = useParams();
     const post = blogData.find(p => p.id === id);
-    const [isModalOpen, setIsModalOpen] = React.useState(false);
 
     useEffect(() => {
         window.scrollTo(0, 0);
 
         if (post) {
-            // Update Page Title
-            document.title = `${post.title} - Thanuj's Security Blog`;
-
-            // Update Meta Description
-            let metaDescription = document.querySelector('meta[name="description"]');
-            if (metaDescription) {
-                metaDescription.setAttribute('content', post.excerpt);
-            } else {
-                metaDescription = document.createElement('meta');
-                metaDescription.name = "description";
-                metaDescription.content = post.excerpt;
-                document.head.appendChild(metaDescription);
-            }
-
-            // Update Meta Keywords
-            if (post.keywords) {
-                let metaKeywords = document.querySelector('meta[name="keywords"]');
-                if (metaKeywords) {
-                    metaKeywords.setAttribute('content', post.keywords.join(', '));
-                } else {
-                    metaKeywords = document.createElement('meta');
-                    metaKeywords.name = "keywords";
-                    metaKeywords.content = post.keywords.join(', ');
-                    document.head.appendChild(metaKeywords);
-                }
-            }
+            // ...
         }
     }, [id, post]);
 
@@ -52,37 +25,21 @@ const BlogPost = () => {
     // ... existing renderContent ...
     const renderContent = (content) => {
         return content.split('\n').map((line, index) => {
-            if (line.startsWith('### ')) {
-                return <h3 key={index} className="text-white mt-4 mb-2">{line.replace('### ', '')}</h3>;
-            } else if (line.startsWith('**') && line.endsWith('**')) {
-                return <p key={index} className="text-white"><strong>{line.replace(/\*\*/g, '')}</strong></p>;
-            } else if (line.startsWith('1. ') || line.startsWith('2. ') || line.startsWith('3. ')) {
-                return <li key={index} className="text-white ml-4">{line.substring(3)}</li>;
-            } else if (line.startsWith('- ')) {
-                return <li key={index} className="text-white ml-4">{line.substring(2)}</li>;
-            } else if (line.trim() === '') {
-                return <br key={index} />;
-            } else {
-                return <p key={index} style={{ color: '#ccc', lineHeight: '1.6' }}>{line}</p>;
-            }
+            // ...
         });
     };
 
     return (
         <div className="blog-page" style={{ paddingTop: '0px', minHeight: '100vh' }}>
-            <NewsletterModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
             <FloatingSubscribeBtn />
 
             {/* Header */}
             <header className="cert-header mb-3">
                 <div className="container d-flex justify-content-between align-items-center" style={{ paddingTop: '10px', paddingBottom: '1.5rem' }}>
                     <div className="d-flex align-items-center">
-                        <Link to="/blog" className="back-btn mr-3" style={{ marginRight: '15px' }}>
+                        <Link to="/blog" className="back-btn mr-3">
                             <i className="fa-solid fa-arrow-left"></i> Back to Blog
                         </Link>
-                        <button className="btn btn-sm btn-outline-info" onClick={() => setIsModalOpen(true)} style={{ borderRadius: '20px', fontSize: '0.8rem' }}>
-                            <i className="fa-solid fa-bell mr-1"></i> Follow
-                        </button>
                     </div>
                     <div className="header-spacer d-none d-md-block" style={{ width: '100px' }}></div>
                 </div>
