@@ -1,8 +1,10 @@
 import React, { useEffect } from 'react';
 import { useParams, Link, Navigate } from 'react-router-dom';
 import blogData from '../data/BlogData';
+import './Blog.css';
 
 const BlogPost = () => {
+    // ... existing hook ...
     const { id } = useParams();
     const post = blogData.find(p => p.id === id);
 
@@ -14,12 +16,12 @@ const BlogPost = () => {
         return <Navigate to="/blog" replace />;
     }
 
-    // Simple parser for content
+    // ... existing renderContent ...
     const renderContent = (content) => {
         return content.split('\n').map((line, index) => {
             if (line.startsWith('### ')) {
                 return <h3 key={index} className="text-white mt-4 mb-2">{line.replace('### ', '')}</h3>;
-            } else if (line.startsWith('**') && line.endsWith('**')) { // Very basic bold check for whole lines
+            } else if (line.startsWith('**') && line.endsWith('**')) {
                 return <p key={index} className="text-white"><strong>{line.replace(/\*\*/g, '')}</strong></p>;
             } else if (line.startsWith('1. ') || line.startsWith('2. ') || line.startsWith('3. ')) {
                 return <li key={index} className="text-white ml-4">{line.substring(3)}</li>;
@@ -34,7 +36,7 @@ const BlogPost = () => {
     };
 
     return (
-        <div className="blog-post-page" style={{ paddingTop: '100px', minHeight: '100vh' }}>
+        <div className="blog-page" style={{ paddingTop: '80px', minHeight: '100vh' }}>
             {/* Header */}
             <header className="cert-header mb-5">
                 <div className="container d-flex justify-content-between align-items-center py-4">
