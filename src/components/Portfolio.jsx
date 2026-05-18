@@ -1,10 +1,23 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import projectsData from '../data/ProjectsData';
 
 const Portfolio = ({ showAll = false }) => {
     const [activeFilter, setActiveFilter] = useState('All');
+    const location = useLocation();
+
+    useEffect(() => {
+        const queryParams = new URLSearchParams(location.search);
+        const projectId = queryParams.get('project');
+        if (projectId) {
+            const project = projectsData.find(p => p.id === parseInt(projectId));
+            if (project) {
+                handleProjectClick(project);
+            }
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [location.search]);
 
     const filters = ['All', 'Web', 'UI', 'Graphic', 'Marketing', 'Cyber'];
 
@@ -59,13 +72,16 @@ const Portfolio = ({ showAll = false }) => {
                     <div style="margin-top: 15px; font-size: 0.9rem; color: var(--accent-color);">
                         <strong>Category:</strong> ${project.category}
                     </div>
-                    ${project.link && project.link !== '#' ? `
-                    <div style="margin-top: 20px;">
+                    <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+                        ${project.link && project.link !== '#' ? `
                         <a href="${project.link}" target="_blank" rel="noopener noreferrer" 
                            style="display: inline-block; padding: 10px 20px; background: var(--accent-color); color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold;">
                            Visit Project
-                        </a>
-                    </div>` : ''}
+                        </a>` : ''}
+                        <button id="copy-share-link-btn" style="display: inline-block; padding: 10px 20px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.3s;">
+                            <i class="fa-solid fa-share-nodes"></i> Share Project
+                        </button>
+                    </div>
                 </div>
             `,
             imageUrl: project.image,
@@ -76,6 +92,22 @@ const Portfolio = ({ showAll = false }) => {
             color: '#fff',
             showCloseButton: true,
             showConfirmButton: false,
+            didOpen: () => {
+                const copyBtn = document.getElementById('copy-share-link-btn');
+                if (copyBtn) {
+                    copyBtn.addEventListener('click', () => {
+                        const shareUrl = window.location.origin + '/projects?project=' + project.id;
+                        navigator.clipboard.writeText(shareUrl).then(() => {
+                            copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                            copyBtn.style.background = 'var(--accent-color)';
+                            setTimeout(() => {
+                                copyBtn.innerHTML = '<i class="fa-solid fa-share-nodes"></i> Share Project';
+                                copyBtn.style.background = 'rgba(255,255,255,0.1)';
+                            }, 2000);
+                        });
+                    });
+                }
+            },
             customClass: {
                 popup: 'glass-popup animated fadeInDown'
             },
