@@ -66,9 +66,7 @@ const projectsData = [
         image: "/images/uvavec-1.jpg",
         gallery: [
             "/images/uvavec-1.jpg",
-            "/images/uvavec-2.jpg",
-            "/images/uvavec-3.jpg",
-            "/images/uvavec-4.jpg"
+            "/images/uvavec-2.jpg"
         ],
         link: "#"
     }
