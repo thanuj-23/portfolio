@@ -1,23 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import projectsData from '../data/ProjectsData';
 
 const Portfolio = ({ showAll = false }) => {
     const [activeFilter, setActiveFilter] = useState('All');
-    const location = useLocation();
-
-    useEffect(() => {
-        const queryParams = new URLSearchParams(location.search);
-        const projectId = queryParams.get('project');
-        if (projectId) {
-            const project = projectsData.find(p => p.id === parseInt(projectId));
-            if (project) {
-                handleProjectClick(project);
-            }
-        }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [location.search]);
 
     const filters = ['All', 'Web', 'UI', 'Graphic', 'Marketing', 'Cyber'];
 
@@ -27,7 +14,22 @@ const Portfolio = ({ showAll = false }) => {
 
     const displayedProjects = showAll ? filteredProjects : filteredProjects.slice(0, 6);
 
+    useEffect(() => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const projectId = urlParams.get('project');
+        if (projectId) {
+            const project = projectsData.find(p => p.id.toString() === projectId);
+            if (project) {
+                setTimeout(() => {
+                    handleProjectClick(project);
+                }, 500);
+            }
+        }
+    }, []);
+
     const handleProjectClick = (project) => {
+        window.history.pushState({}, '', `?project=${project.id}`);
+
         Swal.fire({
             title: `<h3 style="color: #fff; margin-bottom: 10px;">${project.title}</h3>`,
             html: `
@@ -69,19 +71,19 @@ const Portfolio = ({ showAll = false }) => {
                     </div>
                     ` : ''}
 
-                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--accent-color);">
-                        <strong>Category:</strong> ${project.category}
+                    <div style="margin-top: 15px; font-size: 0.9rem; color: var(--accent-color); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <div><strong>Category:</strong> ${project.category}</div>
+                        <button id="share-btn-${project.id}" style="background: transparent; border: 1px solid var(--accent-color); color: var(--accent-color); padding: 5px 15px; border-radius: 5px; cursor: pointer; transition: 0.3s; font-size: 0.85rem;">
+                            <i class="fa-solid fa-share-nodes"></i> Share Link
+                        </button>
                     </div>
-                    <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
-                        ${project.link && project.link !== '#' ? `
+                    ${project.link && project.link !== '#' ? `
+                    <div style="margin-top: 20px;">
                         <a href="${project.link}" target="_blank" rel="noopener noreferrer" 
                            style="display: inline-block; padding: 10px 20px; background: var(--accent-color); color: #fff; text-decoration: none; border-radius: 5px; font-weight: bold;">
                            Visit Project
-                        </a>` : ''}
-                        <button id="copy-share-link-btn" style="display: inline-block; padding: 10px 20px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2); color: #fff; border-radius: 5px; font-weight: bold; cursor: pointer; transition: 0.3s;">
-                            <i class="fa-solid fa-share-nodes"></i> Share Project
-                        </button>
-                    </div>
+                        </a>
+                    </div>` : ''}
                 </div>
             `,
             imageUrl: project.image,
@@ -92,22 +94,6 @@ const Portfolio = ({ showAll = false }) => {
             color: '#fff',
             showCloseButton: true,
             showConfirmButton: false,
-            didOpen: () => {
-                const copyBtn = document.getElementById('copy-share-link-btn');
-                if (copyBtn) {
-                    copyBtn.addEventListener('click', () => {
-                        const shareUrl = window.location.origin + '/projects?project=' + project.id;
-                        navigator.clipboard.writeText(shareUrl).then(() => {
-                            copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
-                            copyBtn.style.background = 'var(--accent-color)';
-                            setTimeout(() => {
-                                copyBtn.innerHTML = '<i class="fa-solid fa-share-nodes"></i> Share Project';
-                                copyBtn.style.background = 'rgba(255,255,255,0.1)';
-                            }, 2000);
-                        });
-                    });
-                }
-            },
             customClass: {
                 popup: 'glass-popup animated fadeInDown'
             },
@@ -115,7 +101,31 @@ const Portfolio = ({ showAll = false }) => {
                 rgba(0,0,0,0.8)
                 left top
                 no-repeat
-            `
+            `,
+            didOpen: () => {
+                const shareBtn = document.getElementById(`share-btn-${project.id}`);
+                if (shareBtn) {
+                    shareBtn.addEventListener('click', () => {
+                        const shareUrl = `${window.location.origin}${window.location.pathname}?project=${project.id}`;
+                        navigator.clipboard.writeText(shareUrl).then(() => {
+                            const originalText = shareBtn.innerHTML;
+                            shareBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
+                            shareBtn.style.background = 'var(--accent-color)';
+                            shareBtn.style.color = '#fff';
+                            setTimeout(() => {
+                                shareBtn.innerHTML = originalText;
+                                shareBtn.style.background = 'transparent';
+                                shareBtn.style.color = 'var(--accent-color)';
+                            }, 2000);
+                        });
+                    });
+                }
+            },
+            didClose: () => {
+                const url = new URL(window.location);
+                url.searchParams.delete('project');
+                window.history.pushState({}, '', url);
+            }
         });
     };
 
