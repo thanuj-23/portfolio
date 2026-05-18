@@ -10,6 +10,7 @@ import Experience from './components/Experience';
 import Testimonials from './components/Testimonials';
 import Certifications from './components/Certifications';
 import AllCertifications from './components/AllCertifications';
+import AllProjects from './components/AllProjects';
 import Skills from './components/Skills';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
@@ -81,6 +82,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/projects" element={<AllProjects />} />
         <Route path="/certifications" element={<AllCertifications />} />
         <Route path="/blog" element={<Blog />} />
         <Route path="/blog/:id" element={<BlogPost />} />
