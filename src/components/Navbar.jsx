@@ -140,7 +140,7 @@ const Navbar = () => {
                         </a>
                     </li>
                 </ul>
-                <a href="/cv.pdf" download="Thanuj_CV.pdf" className="cvbtn" style={{ '--i': 8 }}>
+                <a href="/Thanuj Thilakarathne CV.pdf" download="Thanuj Thilakarathne CV.pdf" className="cvbtn" style={{ '--i': 8 }}>
                     Download CV <i className="fa-solid fa-download"></i>
                 </a>
             </nav>
