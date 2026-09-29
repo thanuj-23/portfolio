@@ -7,7 +7,7 @@ const blogData = [
         id: "start-up",
         title: "Why a Startup Should Care About ISO/IEC 27701",
         author: "Thanuj",
-        date: "Jan 15, 2026",
+        date: "Sep 30, 2026",
         category: "Data Privacy",
         keywords: ["ISO 27701", "ISO 27001", "Data Privacy", "Startups", "GDPR", "PDPA", "Cybersecurity", "Compliance"],
         image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",

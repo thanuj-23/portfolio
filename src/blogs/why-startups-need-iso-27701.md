@@ -4,7 +4,7 @@ Picture this scenario: an emerging e-commerce ecosystem manages 140,000 active c
 
 If a data incident occurs tomorrow morning, who is legally, operationally, and reputational responsible? 
 
-The answer isn't a simple binary—it hinges on the exact role the organization assumes during that specific transaction. This fundamental distinction is precisely why forward-thinking startups are paying close attention to **ISO/IEC 27701**, the dedicated privacy information management extension to ISO/IEC 27001.
+The answer isn't a simple binary - it hinges on the exact role the organization assumes during that specific transaction. This fundamental distinction is precisely why forward-thinking startups are paying close attention to **ISO/IEC 27701**, the dedicated privacy information management extension to ISO/IEC 27001.
 
 ### Data Controller vs. Data Processor: Navigating the Hybrid Dual Role
 
@@ -31,7 +31,7 @@ For an early-stage or scaling company (around 65 team members), privacy complian
 - **Year 1 Implementation:** Estimated at ~$30,000 USD (covers auditing, external gap analysis, and tooling adjustments).
 - **Annual Maintenance:** Roughly ~$8,000 USD per year.
 
-When weighed against avoided breach penalties, reduced cyber insurance premiums, and the ability to close lucrative B2B enterprise deals—where proof of privacy governance is a mandatory prerequisite—the projected **3-year return on investment reaches ~76%**, with full financial payback achievable within **14 months**.
+When weighed against avoided breach penalties, reduced cyber insurance premiums, and the ability to close lucrative B2B enterprise deals - where proof of privacy governance is a mandatory prerequisite - the projected **3-year return on investment reaches ~76%**, with full financial payback achievable within **14 months**.
 
 ### Regulatory Momentum and Regional Precedents
 
@@ -41,9 +41,9 @@ In South Asia, legislative shifts like Sri Lanka’s **Personal Data Protection 
 
 No security framework or certification makes a security incident 100% impossible. However, ISO/IEC 27701 provides indisputable, audited proof that your company maintains an active, accountable system designed to safeguard sensitive information, detect anomalies, and respond swiftly when issues arise.
 
-In an era where enterprise buyers, merchant partners, and consumers demand transparency, verifiable privacy governance is no longer just a legal safeguard—it is one of the strongest growth engines a startup can build.
+In an era where enterprise buyers, merchant partners, and consumers demand transparency, verifiable privacy governance is no longer just a legal safeguard - it is one of the strongest growth engines a startup can build.
 
 ### References & Further Reading
-- **ISO27001security.com** — *ISO/IEC 27701 Privacy Information Management System Overview*
-- **WilmerHale Privacy & Cybersecurity Law Briefs** — *Analysis of Sri Lanka Personal Data Protection Act*
-- **TÜV SÜD South Asia** — *ISO/IEC 27701 Certification Audits & Case Studies*
+- **ISO27001security.com** - *ISO/IEC 27701 Privacy Information Management System Overview*
+- **WilmerHale Privacy & Cybersecurity Law Briefs** - *Analysis of Sri Lanka Personal Data Protection Act*
+- **TÜV SÜD South Asia** - *ISO/IEC 27701 Certification Audits & Case Studies*
