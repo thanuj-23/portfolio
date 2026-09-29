@@ -49,15 +49,20 @@ const BlogPost = () => {
     };
 
     const renderContent = (content) => {
+        if (!content) return null;
         return content.split('\n').map((line, index) => {
-            if (line.startsWith('### ')) {
-                return <h3 key={index} className="text-white mt-4 mb-3" style={{ fontSize: '1.5rem', fontWeight: '700' }}>{line.replace('### ', '')}</h3>;
+            if (line.startsWith('## ')) {
+                return <h2 key={index} className="text-white mt-4 mb-3" style={{ fontSize: '1.75rem', fontWeight: '700' }}>{parseInlineFormat(line.replace('## ', ''))}</h2>;
+            } else if (line.startsWith('### ')) {
+                return <h3 key={index} className="text-white mt-4 mb-3" style={{ fontSize: '1.4rem', fontWeight: '700' }}>{parseInlineFormat(line.replace('### ', ''))}</h3>;
+            } else if (line.startsWith('#### ')) {
+                return <h4 key={index} className="text-white mt-3 mb-2" style={{ fontSize: '1.2rem', fontWeight: '600' }}>{parseInlineFormat(line.replace('#### ', ''))}</h4>;
             } else if (line.match(/^\d+\.\s/)) {
                 return <li key={index} className="text-white ml-4 mb-2" style={{ listStylePosition: 'inside' }}>{parseInlineFormat(line.replace(/^\d+\.\s/, ''))}</li>;
-            } else if (line.startsWith('- ')) {
-                return <li key={index} className="text-white ml-4 mb-2" style={{ listStylePosition: 'inside' }}>{parseInlineFormat(line.substring(2))}</li>;
+            } else if (line.startsWith('- ') || line.startsWith('* ') || line.startsWith('● ')) {
+                const cleaned = line.replace(/^[-*●]\s*/, '');
+                return <li key={index} className="text-white ml-4 mb-2" style={{ listStylePosition: 'inside' }}>{parseInlineFormat(cleaned)}</li>;
             } else if (line.startsWith('`') && line.endsWith('`')) {
-                // Block code (preserving for backward compatibility, though parseInlineFormat handles it too)
                 return <p key={index} className="text-white my-3"><code style={{ background: 'rgba(255,255,255,0.1)', padding: '4px 8px', borderRadius: '4px', fontFamily: 'monospace', color: '#58a6ff' }}>{line.replace(/`/g, '')}</code></p>;
             } else if (line.trim() === '') {
                 return <br key={index} />;

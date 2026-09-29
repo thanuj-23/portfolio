@@ -1,7 +1,19 @@
+import isoPost from '../blogs/why-startups-need-iso-27701.md?raw';
 import ctfPost from '../blogs/how-to-start-playing-ctfs.md?raw';
 import sqliPost from '../blogs/understanding-sql-injection.md?raw';
 
 const blogData = [
+    {
+        id: "start-up",
+        title: "Why a Startup Should Care About ISO/IEC 27701",
+        author: "Thanuj",
+        date: "Jan 15, 2026",
+        category: "Data Privacy",
+        keywords: ["ISO 27701", "ISO 27001", "Data Privacy", "Startups", "GDPR", "PDPA", "Cybersecurity", "Compliance"],
+        image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80",
+        excerpt: "Understanding data roles (Controller vs. Processor) under ISO/IEC 27701 and why privacy management is a strategic growth engine for early-stage startups.",
+        content: isoPost
+    },
     {
         id: "getting-started-with-ctfs",
         title: "How to Start Playing CTFs (Capture The Flag)",
